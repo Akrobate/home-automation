@@ -6,87 +6,112 @@ protocols:
     - HTTP
     - HTTPS
 
-uses:
-    TypeUser: types/user.raml
+#uses:
+#    TypeUser: types/user.raml
 
-/users:
-    description: Users management
-    /{id}:
-        uriParameters:
-            id:
-                description: The user id you want to fetch
-                type: integer
-                example: 1
+/device:
+    description: Device ressource, base path to command and info devices
+
+    /controll:
         get:
-            description: Get the user with the given Id
-            responses:
-                200:
-                    body:
-                        application/json:
-                            type: TypeUser.User
-                            example: !include examples/type.user.json
-
-/users2:
-    description: Users management
-    /read/{id}:
-        uriParameters:
-            id:
-                description: The user id you want to fetch
-                type: integer
-                example: 1
-        get:
-            description: Get the user with the given Id
-            responses:
-                200:
-                    body:
-                        application/json:
-                            type: TypeUser.User
-                            example: !include examples/type.user.json
-
-    /update/{id}:
-        uriParameters:
-            id:
-                description: The user id you want to fetch
-                type: integer
-                example: 1
-        get:
-            description: Get the user with the given Id
-            responses:
-                200:
-                    body:
-                        application/json:
-                            type: TypeUser.User
-                            example: !include examples/type.user.json
-    /create:
-        /me:
-            get:
-                description: Get the user with the given Id
-                responses:
-                    200:
-                        body:
-                            application/json:
-                                type: TypeUser.User
-                                example: !include examples/type.user.json
-
-/users3:
-    description: Users management
-    /read/{id}:
-        uriParameters:
-            id:
-                description: The user id you want to fetch
-                type: integer
-                example: 1
-        /account/{id_account}:
-            uriParameters:
-                id_account:
-                    description: The user id you want to fetch
+            description: Controll a device - send signal to a device
+            queryParameters:
+                group:
+                    description: Group of the chacon device
                     type: integer
-                    example: 1
-            get:
-                description: Get the user with the given Id
-                responses:
-                    200:
-                        body:
-                            application/json:
-                                type: TypeUser.User
-                                example: !include examples/type.user.json
+                    example: 0
+                identity:
+                    description: The EasyHome ID of remote (8 digits - 26 bits)
+                    type: integer
+                    example: 123456789
+                id:
+                    description: The number of the device 0,1,2 ...
+                    type: integer
+                    example: 0
+                command:
+                    description: True -> ON / false -> OFF
+                    type: boolean
+                    example: true
+            responses:
+                200:
+                    body:
+                        application/json:
+                            type: object
+                            properties:
+                                id: number
+                                command: boolean
+                                group: number
+                                updated_at: datetime
+                            example: |
+                                {
+                                  "id": 0,
+                                  "command": true,
+                                  "group": 0,
+                                  "updated_at": "2017-03-01T10:10:10Z"
+                                }
+
+#/users2:
+#    description: Users management
+#    /read/{id}:
+#        uriParameters:
+#            id:
+#                description: The user id you want to fetch
+#                type: integer
+#                example: 1
+#        get:
+#            description: Get the user with the given Id
+#            responses:
+#                200:
+#                    body:
+#                        application/json:
+#                            type: TypeUser.User
+#                            example: !include examples/type.user.json
+#
+#    /update/{id}:
+#        uriParameters:
+#            id:
+#                description: The user id you want to fetch
+#                type: integer
+#                example: 1
+#        get:
+#            description: Get the user with the given Id
+#            responses:
+#                200:
+#                    body:
+#                        application/json:
+#                            type: TypeUser.User
+#                            example: !include examples/type.user.json
+#    /create:
+#        /me:
+#            get:
+#                description: Get the user with the given Id
+#                responses:
+#                    200:
+#                        body:
+#                            application/json:
+#                                type: TypeUser.User
+#                                example: !include examples/type.user.json
+#
+#/users3:
+#    description: Users management
+#    /read/{id}:
+#        uriParameters:
+#            id:
+#                description: The user id you want to fetch
+#                type: integer
+#                example: 1
+#        /account/{id_account}:
+#            uriParameters:
+#                id_account:
+#                    description: The user id you want to fetch
+#                    type: integer
+#                    example: 1
+#            get:
+#                description: Get the user with the given Id
+#                responses:
+#                    200:
+#                        body:
+#                            application/json:
+#                                type: TypeUser.User
+#                                example: !include examples/type.user.json
+#

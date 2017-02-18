@@ -1,6 +1,8 @@
 /**
- *
+ *      Device controller
  */
+
+var exec = require('exec');
 
 export class GetDevicesControll {
 
@@ -15,9 +17,15 @@ export class GetDevicesControll {
             if (e) {
                 reject()
             }
-            resolve(
-                {controller:'contructed Users2ReadId'}
-            )
+
+            let cmd = 'sh ./ir_lights_commander.sh '
+            exec(cmd, function() {
+                console.log("done...")
+                resolve(
+                    {controller:'contructed Users2ReadId'}
+                )
+            })
+
         })
     }
 }

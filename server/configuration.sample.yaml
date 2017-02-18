@@ -1,0 +1,2 @@
+application_port: 3001
+raml_specification_file: "./raml/api.raml"

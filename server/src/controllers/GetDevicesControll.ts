@@ -19,6 +19,8 @@ export class GetDevicesControll {
             }
 
             let cmd = 'sh ./ir_lights_commander.sh '
+            cmd = 'sudo ./send 0 52423867 1 on'
+
             exec(cmd, function() {
                 console.log("done...")
                 resolve(

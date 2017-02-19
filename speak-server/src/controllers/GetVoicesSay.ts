@@ -22,10 +22,8 @@ export class GetVoicesSay {
             let p = params.query;
 
             const schema = Joi.object().keys({
-                group: Joi.number().min(0).max(100).required(),
-                identity: Joi.number().min(0).max(67108863).required(),
-                id: Joi.number().min(0).max(100).required(),
-                command: Joi.boolean().required()
+                voice: Joi.string().min(0).max(100).required(),
+                message: Joi.string().min(0).max(250).required()
             })
 
             const result = Joi.validate(p, schema);
@@ -34,16 +32,12 @@ export class GetVoicesSay {
                 return reject(result.error)
             }
 
-            let command = 'off'
-            if (p.command) {
-                command = 'on'
-            }
             // let cmd = 'sudo ./send 0 52423867 1 on'
-            let cmd = 'sudo ./send ' + p.group + ' ' + p.identity + ' ' + p.id + ' ' + command
+            let cmd = './espeak.sh ' + p.voice + ' ' + p.message
 
             if (debug) {
                 console.log(cmd)
-                return resolve({controller: 'GetDevicesControll', message: cmd })
+                return resolve({controller: 'GetVoicesSay', message: cmd })
             } else {
                 exec(cmd, function(error, stdout, stderr) {
                     console.log("done...")
@@ -53,7 +47,7 @@ export class GetVoicesSay {
                     console.log(stdout)
                     console.log("stderr")
                     console.log(stderr)
-                    return resolve({controller: 'GetDevicesControll'})
+                    return resolve({controller: 'GetVoicesSay'})
                 })
             }
         })

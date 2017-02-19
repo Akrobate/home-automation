@@ -9,29 +9,20 @@ protocols:
 #uses:
 #    TypeUser: types/user.raml
 
-/speech:
+/voices:
     description: Device ressource, base path to command and info devices
-
     /say:
         get:
             description: Get full description of devices
             queryParameters:
-                group:
-                    description: Group of the chacon device
-                    type: integer
-                    example: 0
-                identity:
-                    description: The EasyHome ID of remote (8 digits - 26 bits)
-                    type: integer
-                    example: 123456789
-                id:
-                    description: The number of the device 0,1,2 ...
-                    type: integer
-                    example: 0
-                command:
-                    description: True -> ON / false -> OFF
-                    type: boolean
-                    example: true
+                voice:
+                    description: Name (id) selected voice to say message
+                    type: string
+                    example: "voice_id_1"
+                message:
+                    description: Message to say
+                    type: string
+                    example: "Hello every body"
             responses:
                 200:
                     body:
@@ -39,33 +30,31 @@ protocols:
                             type: object
                             properties:
                                 voice: string
-                                message: string
+                                said: boolean
+                            example: |
+                                {
+                                  "voice": "voice_id_1",
+                                  "said": true
+                                }
+    /info:
+        get:
+            description: Get full description of devices
+            responses:
+                200:
+                    body:
+                        application/json:
+                            type: object
+                            properties:
+                                id: number
+                                command: boolean
+                                group: number
+                                group1: object
                                 updated_at: datetime
                             example: |
                                 {
-                                  "voice": "Voice_of_1",
+                                  "id": 0,
                                   "command": true,
                                   "group": 0,
-                                  "updated_at": "2017-03-01T10:10:10Z"
+                                  "updated_at": "2017-03-01T10:10:10Z",
+                                  "group1": {}
                                 }
-/voices:
-    description: Device ressource, base path to command and info devices
-    get:
-        description: Get full description of devices
-        responses:
-            200:
-                body:
-                    application/json:
-                        type: object
-                        properties:
-                            id: number
-                            command: boolean
-                            group: number
-                            updated_at: datetime
-                        example: |
-                            {
-                              "id": 0,
-                              "command": true,
-                              "group": 0,
-                              "updated_at": "2017-03-01T10:10:10Z"
-                            }

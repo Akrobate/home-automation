@@ -8,7 +8,7 @@ const exec = require('child_process').exec
 const Joi = require('joi');
 const debug = true
 
-export class GetDevicesControll {
+export class GetVoicesSay {
 
     public constructor() {
         // console.log('contructed Users2ReadId')

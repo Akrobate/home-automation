@@ -4,10 +4,10 @@
 
 'use strict'
 
-import {DevicesConfiguration} from '../configurations/DevicesConfigurationLoader'
-let config:any = DevicesConfiguration
+import {VoicesConfiguration} from '../configurations/VoicesConfigurationLoader'
+let config:any = VoicesConfiguration
 
-export class GetDevicesInfo {
+export class GetVoicesInfo {
     public process(params: any): Promise<any> {
         return new Promise((resolve: any, reject: any)=>{
             if (Object.keys(params.query).length === 0) {

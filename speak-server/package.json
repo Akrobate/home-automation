@@ -1,7 +1,7 @@
 {
-  "name": "node-api-framework",
-  "version": "1.0.0",
-  "description": "example",
+  "name": "speak-server",
+  "version": "0.0.1",
+  "description": "Speak server is a http server for the speech generation",
   "main": "dist/src/app.js",
   "scripts": {
     "pretest": "$(npm bin)/tsc",

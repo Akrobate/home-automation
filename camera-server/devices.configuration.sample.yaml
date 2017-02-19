@@ -5,7 +5,7 @@ devices:
         skip_frames: 20
         camera: /dev/video0
     -
-        name: "video_id_1"
+        name: "video_id_2"
         resolution: 640x480
         skip_frames: 20
         camera: /dev/video1

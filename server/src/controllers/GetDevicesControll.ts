@@ -2,7 +2,9 @@
  *      Device controller
  */
 
-var exec = require('exec');
+
+var exec = require('child_process').exec
+const Joi = require('joi');
 
 export class GetDevicesControll {
 
@@ -11,23 +13,55 @@ export class GetDevicesControll {
     }
 
     public process(params: any): Promise<any> {
-        return new Promise((resolve: any, reject: any)=>{
-            console.log(params)
-            let e = false
-            if (e) {
-                reject()
-            }
 
-            let cmd = 'sh ./ir_lights_commander.sh '
-            cmd = 'sudo ./send 0 52423867 1 on'
+        console.log(params.query)
 
-            exec(cmd, function() {
-                console.log("done...")
-                resolve(
-                    {controller:'contructed Users2ReadId'}
-                )
-            })
-
+        const schema = Joi.object().keys({
+            group: Joi.number().min(0).max(100).required(),
+            identity: Joi.number().min(0).max(67108863).required(),
+            id: Joi.number().min(0).max(100).required(),
+            command: Joi.boolean().required()
         })
+
+        const result = Joi.validate(params.query, schema);
+        if (result.error !== null) {
+            return new Promise((resolve: any, reject: any) => {
+                console.log(result)
+                reject({controller:'Problem'})
+                if (0) {
+                    resolve()
+                }
+            })
+        } else {
+            return new Promise((resolve: any, reject: any)=>{
+                //console.log(params)
+                let e = false
+                if (e) {
+                    reject()
+                }
+
+                let cmd = 'sh ./ir_lights_commander.sh '
+                cmd = 'sudo ./send 0 52423867 1 on'
+
+                let debug = true
+                if (debug) {
+                    console.log(cmd)
+                    resolve({controller:'contructed GetDevicesControll', message: cmd })
+                } else {
+                    exec(cmd, function(error, stdout, stderr) {
+                        console.log("done...")
+                        console.log("error")
+                        console.log(error)
+                        console.log("stdout")
+                        console.log(stdout)
+                        console.log("stderr")
+                        console.log(stderr)
+                        resolve(
+                            {controller:'contructed Users2ReadId'}
+                        )
+                    })
+                }
+            })
+        }
     }
 }

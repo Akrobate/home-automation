@@ -104,7 +104,8 @@ export class Server {
                         let controller = new ControllerType()
                         controller.process(params).then((data) => {
                             return response.json(data)
-                        }).catch(() => {
+                        }).catch((data) => {
+                            console.log(data)
                             return response.json({ 'code' : 1, 'msg': "Controller has not process"})
                         })
                     }

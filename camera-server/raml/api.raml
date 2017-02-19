@@ -1,0 +1,72 @@
+#%RAML 1.0
+title: Api node framework specifications
+baseUri: /{version}
+version: v1
+protocols:
+    - HTTP
+    - HTTPS
+
+#uses:
+#    TypeUser: types/user.raml
+
+/devices:
+    description: Device ressource, base path to command and info devices
+
+    /info:
+        get:
+            description: Get full description of devices
+            responses:
+                200:
+                    body:
+                        application/json:
+                            type: object
+                            properties:
+                                id: number
+                                command: boolean
+                                group: number
+                                updated_at: datetime
+                            example: |
+                                {
+                                  "id": 0,
+                                  "command": true,
+                                  "group": 0,
+                                  "updated_at": "2017-03-01T10:10:10Z"
+                                }
+
+    /controll:
+        get:
+            description: Controll a device - send signal to a device
+            queryParameters:
+                group:
+                    description: Group of the chacon device
+                    type: integer
+                    example: 0
+                identity:
+                    description: The EasyHome ID of remote (8 digits - 26 bits)
+                    type: integer
+                    example: 123456789
+                id:
+                    description: The number of the device 0,1,2 ...
+                    type: integer
+                    example: 0
+                command:
+                    description: True -> ON / false -> OFF
+                    type: boolean
+                    example: true
+            responses:
+                200:
+                    body:
+                        application/json:
+                            type: object
+                            properties:
+                                id: number
+                                command: boolean
+                                group: number
+                                updated_at: datetime
+                            example: |
+                                {
+                                  "id": 0,
+                                  "command": true,
+                                  "group": 0,
+                                  "updated_at": "2017-03-01T10:10:10Z"
+                                }

@@ -15,27 +15,6 @@ protocols:
     /say:
         get:
             description: Get full description of devices
-            responses:
-                200:
-                    body:
-                        application/json:
-                            type: object
-                            properties:
-                                id: number
-                                command: boolean
-                                group: number
-                                updated_at: datetime
-                            example: |
-                                {
-                                  "id": 0,
-                                  "command": true,
-                                  "group": 0,
-                                  "updated_at": "2017-03-01T10:10:10Z"
-                                }
-
-    /controll:
-        get:
-            description: Controll a device - send signal to a device
             queryParameters:
                 group:
                     description: Group of the chacon device
@@ -59,14 +38,34 @@ protocols:
                         application/json:
                             type: object
                             properties:
-                                id: number
-                                command: boolean
-                                group: number
+                                voice: string
+                                message: string
                                 updated_at: datetime
                             example: |
                                 {
-                                  "id": 0,
+                                  "voice": "Voice_of_1",
                                   "command": true,
                                   "group": 0,
                                   "updated_at": "2017-03-01T10:10:10Z"
                                 }
+/voices:
+    description: Device ressource, base path to command and info devices
+    get:
+        description: Get full description of devices
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: object
+                        properties:
+                            id: number
+                            command: boolean
+                            group: number
+                            updated_at: datetime
+                        example: |
+                            {
+                              "id": 0,
+                              "command": true,
+                              "group": 0,
+                              "updated_at": "2017-03-01T10:10:10Z"
+                            }

@@ -8,7 +8,7 @@ const exec = require('child_process').exec
 const Joi = require('joi');
 const debug = true
 
-export class GetDevicesControll {
+export class GetCameraSnapshot {
 
     public constructor() {
         // console.log('contructed Users2ReadId')
@@ -22,24 +22,16 @@ export class GetDevicesControll {
             let p = params.query;
 
             const schema = Joi.object().keys({
-                group: Joi.number().min(0).max(100).required(),
-                identity: Joi.number().min(0).max(67108863).required(),
-                id: Joi.number().min(0).max(100).required(),
-                command: Joi.boolean().required()
+                camera: Joi.string().min(0).max(100).required(),
             })
 
             const result = Joi.validate(p, schema);
             if (result.error !== null) {
-                // console.log(JSON.stringify(result, null, 2))
                 return reject(result.error)
             }
 
-            let command = 'off'
-            if (p.command) {
-                command = 'on'
-            }
             // let cmd = 'sudo ./send 0 52423867 1 on'
-            let cmd = 'sudo ./send ' + p.group + ' ' + p.identity + ' ' + p.id + ' ' + command
+            let cmd = 'sudo ./send ' + p.group + ' ' + p.identity + ' ' + p.id + ' '
 
             if (debug) {
                 console.log(cmd)

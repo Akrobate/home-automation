@@ -7,7 +7,7 @@
 import {DevicesConfiguration} from '../configurations/DevicesConfigurationLoader'
 let config:any = DevicesConfiguration
 
-export class GetDevicesInfo {
+export class GetCameraInfo {
     public process(params: any): Promise<any> {
         return new Promise((resolve: any, reject: any)=>{
             if (Object.keys(params.query).length === 0) {

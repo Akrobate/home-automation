@@ -1,6 +1,7 @@
 dist
 
 configuration.yaml
+devices.configuration.yaml
 
 # Logs
 logs
@@ -39,4 +40,3 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-api-raml-documentation

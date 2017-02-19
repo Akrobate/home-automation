@@ -12,6 +12,27 @@ protocols:
 /devices:
     description: Device ressource, base path to command and info devices
 
+    /info:
+        get:
+            description: Get full description of devices
+            responses:
+                200:
+                    body:
+                        application/json:
+                            type: object
+                            properties:
+                                id: number
+                                command: boolean
+                                group: number
+                                updated_at: datetime
+                            example: |
+                                {
+                                  "id": 0,
+                                  "command": true,
+                                  "group": 0,
+                                  "updated_at": "2017-03-01T10:10:10Z"
+                                }
+
     /controll:
         get:
             description: Controll a device - send signal to a device

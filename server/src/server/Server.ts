@@ -103,16 +103,21 @@ export class Server {
                     } else {
                         let controller = new ControllerType()
                         controller.process(params).then((data) => {
+                            console.log("200 - SUCCESS")
                             return response.json(data)
-                        }).catch((data) => {
-                            console.log(data)
-                            return response.json({ 'code' : 1, 'msg': "Controller has not process"})
+                        }).catch((error) => {
+                            if (error.name === 'ValidationError') {
+                                console.log("400 - BAD PARAMETERS")
+                                return response.status(400).json({ error: true, 'message': "Bad parameters", "details": error.details})
+                            } else {
+                                console.log("500 - Impossible to process controller")
+                                return response.status(500).json({ error: true, 'message': "Controller has not process"})
+                            }
                         })
                     }
                 }))
                 console.log(route)
             }
-
             this.addRoutes(new Routes({ base_url: '/', routes: routes_list } ));
         }
     }

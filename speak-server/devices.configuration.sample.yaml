@@ -1,0 +1,22 @@
+identities:
+    identityA: 12345678
+
+devices:
+    -
+        id: 0
+        group: 0
+        identity: identityA
+        name: bedroom_room_light
+        label: Bed room light
+    -
+        id: 1
+        group: 0
+        identity: identityA
+        name: decoration_livingroom_light
+        label: Small decoration livingroom light
+    -
+        id: 2
+        group: 0
+        identity: identityA
+        name: livingroom_light
+        label: Livingroom light

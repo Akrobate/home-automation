@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+   db:
+     image: mysql
+     volumes:
+       - ./mysql_data:/var/lib/mysql
+     restart: always
+     ports:
+       - 4401:3306
+     environment:
+       MYSQL_ROOT_PASSWORD: node_api
+       MYSQL_DATABASE: node_api
+       MYSQL_USER: node_api
+       MYSQL_PASSWORD: node_api

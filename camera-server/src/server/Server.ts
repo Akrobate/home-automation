@@ -28,8 +28,6 @@ export class Server {
      */
     private config: any
 
-    // private app: express.Express = null;
-
     /**
      * Creates an instance of Server.
      *
@@ -131,6 +129,16 @@ export class Server {
             // Logger.getInstance().debug('Server running on port ' + this.config.port);
             console.log('Server running on port ' + this.config.port)
         });
+    }
+
+
+    /**
+     * [staticServer description]
+     * @param {[type]} path [description]
+     */
+
+    public staticServer(path: string): void {
+        this.app.use(express.static(__dirname + '/' + path));
     }
 
     public getApp(): express.Application {

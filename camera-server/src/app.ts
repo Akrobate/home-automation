@@ -1,11 +1,10 @@
 // import {Request, Response} from 'express';
 let RamlAutoRoute = require('raml-autoroute')
+
 import {Server} from './server/Server';
-// import {Routes} from './Routes';
-// import {Route} from './Route';
 import {HeadersMiddleware} from './server/middlewares/HeadersMiddleware';
 import {BodyParserMiddleware} from './server/middlewares/BodyParserMiddleware';
-// import {LoggerMiddleware} from './middlewares/LoggerMiddleware';
+import {ClassAutoload} from './libs/ClassAutoload'
 import {Configuration} from './configurations/ConfigurationLoader'
 
 let config:any = Configuration
@@ -30,16 +29,19 @@ if (print_schema) {
     console.log(JSON.stringify(ramljson, null, 2))
 }
 
-// console.log(JSON.stringify(raml_auto_route.getRoutes(), null, 2))
-
-import {ClassAutoload} from './libs/ClassAutoload'
-
 let autoloader = new ClassAutoload()
 autoloader.setClassDirectoryPath('./controllers')
 
-// /v1/users2/create/me
-
 server.addRoutesFromRamlAutoRoute(raml_auto_route)
 
-// server.addRoutes(new Routes(api_v1_routes_configuration));
+//   ____ _____  _  _____ ___ ____   ____  _____ ______     _______ ____
+//  / ___|_   _|/ \|_   _|_ _/ ___| / ___|| ____|  _ \ \   / / ____|  _ \
+//  \___ \ | | / _ \ | |  | | |     \___ \|  _| | |_) \ \ / /|  _| | |_) |
+//   ___) || |/ ___ \| |  | | |___   ___) | |___|  _ < \ V / | |___|  _ <
+//  |____/ |_/_/   \_\_| |___\____| |____/|_____|_| \_\ \_/  |_____|_| \_\
+//
+//
+//
+server.staticServer(config.service_data_path)
+
 server.listen();

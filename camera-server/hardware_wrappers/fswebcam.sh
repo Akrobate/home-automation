@@ -8,4 +8,4 @@
 #
 # fswebcam -r 640x480 --jpeg 100 -S 20 web-cam-shot.jpg -d /dev/video0
 
-fswebcam -r 640x480 --jpeg 100 -S 20 web-cam-shot.jpg -d /dev/video0
+fswebcam -r $1 --jpeg 100 -S $2 $3 -d $4

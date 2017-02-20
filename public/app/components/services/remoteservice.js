@@ -10,15 +10,23 @@
 angular.module('myApp')
 	.service('remoteService', function ($http) {
 
-		// AngularJS will instantiate a singleton by calling "new" on this function
 		var self = this;
+        var base_url = "http://localhost:3001/";
 
         this.getInfos = function(name) {
             var request = $http({
-                method: "post",
-                url: "api/index.cfm",
+                method: "get",
+                url: base_url + "v1/devices/info",
+            });
+            return( request.then( handleSuccess, handleError ) );
+        }
+
+        /*
+        this.getInfos = function(name) {
+            var request = $http({
+                method: "get",
+                url: base_url + "v1/devices/info",
                 params: {
-                    action: "add"
                 },
                 data: {
                     name: name
@@ -26,4 +34,5 @@ angular.module('myApp')
             });
             return( request.then( handleSuccess, handleError ) );
         }
+        */
 	});

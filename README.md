@@ -1,2 +1,5 @@
 # home-automation
-Server to controll EasyHome devices
+
+Microservices framework for home-automation tasks
+
+Include controll of EasyHome devices
